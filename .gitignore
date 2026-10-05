@@ -1,0 +1,11 @@
+# secrets: API keyss, never commit
+.env
+
+# python junk, rebuilt automatically
+--pycache--/
+
+# the virtual environment (backup rule)
+.venv/
+
+# saved AI models, too big for Git
+*.pt
