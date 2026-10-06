@@ -9,3 +9,7 @@
 
 # saved AI models, too big for Git
 *.pt
+
+
+# saved notes foe dev
+notes.txt
