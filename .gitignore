@@ -2,14 +2,10 @@
 .env
 
 # python junk, rebuilt automatically
---pycache--/
+__pycache__/
 
 # the virtual environment (backup rule)
 .venv/
 
 # saved AI models, too big for Git
 *.pt
-
-
-# saved notes foe dev
-notes.txt
