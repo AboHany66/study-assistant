@@ -8,7 +8,7 @@ what it does :
  Answers questions from my lecture PDFs, with the page each answer came from.    
   
 status :
-  Week 2: setting up Git.
+  Week 2: Git done, repo is public.
 
 Tools:
     Python 
