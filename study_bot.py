@@ -25,7 +25,7 @@ headers =  {
 
 body = {
     "model": "gemini-3.6-flash",
-    "input": "Explain how TCP congestion control works in two sentences."
+    "input": input("enter ur quistion")
   }
 
 response = requests.post(url, headers=headers, json=body)
