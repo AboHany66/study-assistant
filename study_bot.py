@@ -1,5 +1,6 @@
 import os 
 import requests
+import time
 
 
 from dotenv import load_dotenv
@@ -25,10 +26,31 @@ headers =  {
 
 body = {
     "model": "gemini-3.6-flash",
-    "input": input("enter ur quistion")
+    "input": input("enter your quistion: ")
   }
 
-response = requests.post(url, headers=headers, json=body)
+attempts = 0
 
-print(response.status_code)
-print(response.json())
+while attempts < 3:
+    attempts +=1
+
+    response = requests.post(url, headers=headers, json=body)
+
+    status = response.status_code
+
+    print(f"tries: {attempts}, status: {status}")
+
+    if status == 200:
+
+      data = response.json()
+
+      answer = data["steps"][1]["content"][0]["text"]
+
+      print(answer)
+      break
+    elif status == 429 or status >= 500:
+       time.sleep(3)
+    else:
+       print("The problem is on the user side")
+       break
+print("Thank You")       
