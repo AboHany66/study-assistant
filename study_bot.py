@@ -22,35 +22,49 @@ headers =  {
     "Content-Type": "application/json",
 }
 
+last_id = ""
 
 
-body = {
+
+
+
+while True :
+    question = input("enter your quistion: ")
+    body = {
     "model": "gemini-3.6-flash",
-    "input": input("enter your quistion: ")
-  }
+    "input": question,
+   }
+    
 
-attempts = 0
-
-while attempts < 3:
-    attempts +=1
-
-    response = requests.post(url, headers=headers, json=body)
-
-    status = response.status_code
-
-    print(f"tries: {attempts}, status: {status}")
-
-    if status == 200:
-
-      data = response.json()
-
-      answer = data["steps"][1]["content"][0]["text"]
-
-      print(answer)
-      break
-    elif status == 429 or status >= 500:
-       time.sleep(3)
-    else:
-       print("The problem is on the user side")
+    if question == "quit":
        break
+    if last_id != "":
+       body["previous_interaction_id"] = last_id
+
+    attempts = 0
+    while attempts < 3:
+        attempts +=1
+
+        response = requests.post(url, headers=headers, json=body)
+
+        status = response.status_code
+
+        print(f"tries: {attempts}, status: {status}")
+
+        if status == 200:
+
+          data = response.json()
+
+          last_id = data["id"]
+
+          answer = data["steps"][1]["content"][0]["text"]
+
+          print(answer)
+          break
+        elif status == 429 or status >= 500:
+          time.sleep(3)
+        else:
+          print("The problem is on the user side")
+          break
+
 print("Thank You")       
